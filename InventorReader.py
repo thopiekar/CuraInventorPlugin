@@ -94,7 +94,7 @@ class InventorReader(CommonCOMReader):
         return None
     
     def openForeignFile(self, options):
-        document_last_opened = options["app_instance"].ActiveDocument()
+        document_last_opened = options["app_instance"].ActiveDocument
         if document_last_opened:
             options["document_last_opened"] = document_last_opened
         if options["foreignFile"] not in self.getOpenDocuments(options).keys():
