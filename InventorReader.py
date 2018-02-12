@@ -159,7 +159,7 @@ class InventorReader(CommonCOMReader):
             # Set accuracy
             # http://help.autodesk.com/view/INVNTOR/2018/ENU/?guid=GUID-5FDFF606-1D15-4FA0-9ED1-1BF4A3BCEBF8
             
-            # *** The following are only used for “Custom” resolution
+            # *** The following are only used for "Custom" resolution
             #  
             # SurfaceDeviation
             #                 0 to 100 for a percentage between values computed based on the size of the model.
