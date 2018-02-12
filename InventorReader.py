@@ -119,7 +119,6 @@ class InventorReader(CommonCOMReader):
                     fullfilename = item.FullFileName
                     if fullfilename not in parts_or_assemblies:
                         parts_or_assemblies.append(fullfilename)
-            print(parts_or_assemblies)
             if len(parts_or_assemblies) == 1:
                 if parts_or_assemblies[0] not in self.getOpenDocuments(options).keys():
                     # TODO: http://help.autodesk.com/view/INVNTOR/2018/ENU/?guid=GUID-44DDD7C9-D90E-4F49-BEE2-757EE785C826
