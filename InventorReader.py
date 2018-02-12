@@ -135,7 +135,7 @@ class InventorReader(CommonCOMReader):
         option.Remove(key)
         option.Insert(key, value)
 
-    def exportFileAs(self, options):
+    def exportFileAs(self, options, quality_enum):
         STLTranslatorAddIn = options["app_instance"].ApplicationAddIns.ItemById("{533E9A98-FC3B-11D4-8E7E-0010B541CD80}")
         exportContext = options["app_instance"].TransientObjects.CreateTranslationContext()
         exportOptions = options["app_instance"].TransientObjects.CreateNameValueMap()
