@@ -5,6 +5,7 @@
     "email" : "thopiekar@gmail.com",
     "version": "0.1.3",
     "supported_os" : ["Windows"],
+    "website": "https://thopiekar.eu/cura/plugins/cad/inventor/",
     "description": "Gives you the possibility to open certain files using Inventor itself. Conversion is done by this plugin.",
     "api": 4,
     "i18n-catalog": "InventorPlugin"
