@@ -134,7 +134,7 @@ class InventorReader(CommonCOMReader):
         option.Remove(key)
         option.Insert(key, value)
 
-    def exportFileAs(self, options, quality_enum):
+    def exportFileAs(self, options, quality_enum = None):
         STLTranslatorAddIn = options["app_instance"].ApplicationAddIns.ItemById("{533E9A98-FC3B-11D4-8E7E-0010B541CD80}")
         exportContext = options["app_instance"].TransientObjects.CreateTranslationContext()
         exportOptions = options["app_instance"].TransientObjects.CreateNameValueMap()
@@ -150,6 +150,8 @@ class InventorReader(CommonCOMReader):
         #               ExportFileStructure = 0
         #               OutputFileType = 0
         #               ExportColor = True
+        
+        ## Note: Backing up settings is not needed. The changes we make are not persistent.
         if STLTranslatorAddIn.HasSaveCopyAsOptions(options["document"], exportContext, exportOptions):
             # Set Unit
             #options["option_exportunits"] = exportOptions["ExportUnits"] # TODO: Check whether this affects the default settings
@@ -197,7 +199,6 @@ class InventorReader(CommonCOMReader):
                                           exportOptions,
                                           exportData,
                                           )
-        
 
     def closeForeignFile(self, options):
         
