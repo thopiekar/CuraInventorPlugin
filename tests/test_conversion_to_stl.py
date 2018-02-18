@@ -42,7 +42,7 @@ except:
     #ThisApplication.Visible=True
 
 #foreign_filename = ".\\tests\\Inventor Professional 2018\\test_cube.ipt"
-#foreign_filename = ".\\test\\Inventor Professional 2018\\test_cube.iam"
+#foreign_filename = ".\\tests\\Inventor Professional 2018\\test_cube.iam"
 foreign_filename = ".\\tests\\Inventor Professional 2018\\test_cube.dwg"
 foreign_filename = os.path.realpath(foreign_filename)
 
