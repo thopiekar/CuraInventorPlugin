@@ -63,6 +63,8 @@ class InventorReader(CommonCOMReader):
         if not options["app_was_active"]:
             options["app_instance_visible"] = options["app_instance"].Visible
             options["app_instance"].Visible = False
+        
+        options["fileFormats"].append("stl")
 
         return options
 
