@@ -1,5 +1,5 @@
 {
-    "name": "Autodesk Inventor Integration (beta)",
+    "name": "Autodesk Inventor Integration",
     "id" : "CuraInventorPlugin",
     "author": "Thomas Karl Pietrowski",
     "email" : "thopiekar@gmail.com",
