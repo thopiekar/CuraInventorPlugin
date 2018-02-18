@@ -43,7 +43,8 @@ except:
 
 #foreign_filename = "C:\\Users\\t.pietrowskie\\AppData\\Roaming\\cura\\3.0\\plugins\\CuraInventorPlugin\\CuraInventorPlugin\\test\\Inventor Professional 2018\\test_cube.ipt"
 #foreign_filename = "C:\\Users\\t.pietrowskie\\AppData\\Roaming\\cura\\3.0\\plugins\\CuraInventorPlugin\\CuraInventorPlugin\\test\\Inventor Professional 2018\\test_cube.iam"
-foreign_filename = "C:\\Users\\t.pietrowskie\\AppData\\Roaming\\cura\\3.0\\plugins\\CuraInventorPlugin\\CuraInventorPlugin\\test\\Inventor Professional 2018\\test_cube.dwg"
+foreign_filename = ".\\tests\\Inventor Professional 2018\\test_cube.dwg"
+foreign_filename = os.path.realpath(foreign_filename)
 
 #Document = ThisApplication.ActiveDocument
 
