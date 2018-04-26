@@ -3,7 +3,7 @@
     "id" : "CuraInventorPlugin",
     "author": "Thomas Karl Pietrowski",
     "email" : "thopiekar@gmail.com",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "website": "https://thopiekar.eu/cura/plugins/cad/inventor/",
     "supported_os": ["Windows"],
     "description": "Gives you the possibility to open certain files using Inventor itself. Conversion is done by this plugin.",
