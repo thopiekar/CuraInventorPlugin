@@ -24,8 +24,8 @@ from .InventorConstants import ExportUnits, Resolution, OutputFileType
 from .CadIntegrationUtils.CommonComReader import CommonCOMReader # @UnresolvedImport
 from .CadIntegrationUtils.ComFactory import ComConnector # @UnresolvedImport
 
+# Translations
 i18n_catalog = i18nCatalog("InventorPlugin")
-
 
 def is_askinv_service():
     service_name =  "Inventor.Application"
@@ -63,7 +63,7 @@ class InventorReader(CommonCOMReader):
         if not options["app_was_active"]:
             options["app_instance_visible"] = options["app_instance"].Visible
             options["app_instance"].Visible = False
-        
+
         options["fileFormats"].append("stl")
 
         return options
@@ -74,11 +74,11 @@ class InventorReader(CommonCOMReader):
             # Or there is another sense..
             if "app_instance_visible" in options.keys():
                 options["app_instance"].Visible = options["app_instance_visible"]
-            
+
             if not options["app_was_active"]:
                 options["app_instance_visible"] = options["app_instance"].Quit()
-    
-    
+
+
     def getOpenDocuments(self, options):
         open_documents = {}
         if options["app_instance"].Documents.Count:
@@ -86,7 +86,7 @@ class InventorReader(CommonCOMReader):
                 open_document = options["app_instance"].Documents.Item(i+1)
                 open_documents[open_document.FullFileName] = open_document
         return open_documents
-    
+
     def getDocumentByPath(self, options, filename):
         if options["app_instance"].Documents.Count:
             for i in range(options["app_instance"].Documents.Count):
@@ -94,7 +94,7 @@ class InventorReader(CommonCOMReader):
                 if open_document.FullFileName == filename:
                     return open_document
         return None
-    
+
     def openForeignFile(self, options):
         document_last_opened = options["app_instance"].ActiveDocument
         if document_last_opened:
@@ -107,11 +107,11 @@ class InventorReader(CommonCOMReader):
             options["document"] = self.getDocumentByPath(options, options["foreignFile"])
             #if None, then closed in meantime.
             options["document_opened"] = False
-        
+
         if options["foreignFile"].upper().endswith(self._extension_drawing):
             options["parent_document"] = options["document"]
             options["parent_document_opened"] = options["document_opened"]
-            
+
             parts_or_assemblies = []
             for sheet in options["parent_document"].Sheets:
                 for drawing_view_i in range(sheet.DrawingViews.Count):
@@ -131,7 +131,7 @@ class InventorReader(CommonCOMReader):
             options["parent_document"] = None
 
         return options
-    
+
     def optionReplaceValueForKey(self, option, key, value):
         option.Remove(key)
         option.Insert(key, value)
@@ -152,19 +152,19 @@ class InventorReader(CommonCOMReader):
         #               ExportFileStructure = 0
         #               OutputFileType = 0
         #               ExportColor = True
-        
+
         ## Note: Backing up settings is not needed. The changes we make are not persistent.
         if STLTranslatorAddIn.HasSaveCopyAsOptions(options["document"], exportContext, exportOptions):
             # Set Unit
             #options["option_exportunits"] = exportOptions["ExportUnits"] # TODO: Check whether this affects the default settings
             exportOptions.Remove("ExportUnits")
             exportOptions.Insert("ExportUnits", ExportUnits.Millimeter)
-            
+
             # Set accuracy
             # http://help.autodesk.com/view/INVNTOR/2018/ENU/?guid=GUID-5FDFF606-1D15-4FA0-9ED1-1BF4A3BCEBF8
-            
+
             # *** The following are only used for "Custom" resolution
-            #  
+            #
             # SurfaceDeviation
             #                 0 to 100 for a percentage between values computed based on the size of the model.
             # NormalDeviation
@@ -175,27 +175,27 @@ class InventorReader(CommonCOMReader):
             #                0 to 40 for values between 1.5 to 21.5 in 0.5 increments
             #
             # https://forums.autodesk.com/t5/inventor-customization/ilogic-stl-translator-specific-parameters-info/td-p/4418665
-            
+
             #options["option_resolution"] = exportOptions["Resolution"] # TODO: Check whether this affects the default settings
             exportOptions.Remove("Resolution")
             exportOptions.Insert("Resolution", Resolution.High)
-            
+
             # Set output file type:
             #options["option_outputfiletype"] = exportOptions["OutputFileType"] # TODO: Check whether this affects the default settings
             exportOptions.Remove("OutputFileType")
             exportOptions.Insert("OutputFileType", OutputFileType.binary)
-            
+
             # Set output file type:
             #options["option_exportcolor"] = exportOptions["ExportColor"] # TODO: Check whether this affects the default settings
             exportOptions.Remove("ExportColor")
             exportOptions.Insert("ExportColor", False)
-            
+
             # IOMechanismEnum Enumerator - http://help.autodesk.com/view/INVNTOR/2018/ENU/?guid=GUID-A3660CD6-8B11-48CE-9FA5-E51DCC6F8DEB
             exportContext.Type = 13059 #kFileBrowseIOMechanism
-            
+
             exportData = options["app_instance"].TransientObjects.CreateDataMedium()
             exportData.FileName = options["tempFile"]
-            
+
             STLTranslatorAddIn.SaveCopyAs(options["document"],
                                           exportContext,
                                           exportOptions,
@@ -203,14 +203,14 @@ class InventorReader(CommonCOMReader):
                                           )
 
     def closeForeignFile(self, options):
-        
+
         if "document_opened" in options.keys():
             if options["document"]:
                 options["document"].Close(True)
         if "parent_document_opened" in options.keys():
             if options["parent_document"]:
                 options["parent_document"].Close(True)
-        
+
         """
         # Needs probably reimplementation
         if options["document_last_opened"]:
