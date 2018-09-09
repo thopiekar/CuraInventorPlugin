@@ -19,19 +19,19 @@ if Platform.isWindows():
 def getMetaData():
     metaData = {"mesh_reader": [{
                                  "extension": "IPT",
-                                 "description": i18n_catalog.i18nc("@item:inlistbox", "Inventor part file")
+                                 "description": i18n_catalog.i18nc("@item:inlistbox", "Autodesk Inventor part file")
                                  },
                                 {
                                  "extension": "IAM",
-                                 "description": i18n_catalog.i18nc("@item:inlistbox", "Inventor assembly file")
+                                 "description": i18n_catalog.i18nc("@item:inlistbox", "Autodesk Inventor assembly file")
                                  },
                                 {
                                  "extension": "DWG",
-                                 "description": i18n_catalog.i18nc("@item:inlistbox", "Inventor drawing file")
+                                 "description": i18n_catalog.i18nc("@item:inlistbox", "Autodesk Inventor drawing file")
                                  },
                                 ],
                 }
-    
+
     return metaData
 
 def register(app):
