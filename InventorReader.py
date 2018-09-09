@@ -4,6 +4,7 @@
 # * Adding selection to separately import parts from an assembly
 
 # Build-ins
+import distutils.version.LooseVersion
 import math
 import os
 import winreg
@@ -18,6 +19,10 @@ from UM.Math.Vector import Vector # @UnresolvedImport
 from UM.Math.Quaternion import Quaternion # @UnresolvedImport
 from UM.Mesh.MeshReader import MeshReader # @UnresolvedImport
 from UM.PluginRegistry import PluginRegistry # @UnresolvedImport
+
+# Since 3.4: Register Mimetypes:
+if distutils.version.LooseVersion("3.4") <= distutils.version.LooseVersion(Application.getInstance().getVersion()):
+    from UM.MimeTypeDatabase import MimeTypeDatabase, MimeType
 
 # Our plugin
 from .InventorConstants import ExportUnits, Resolution, OutputFileType
@@ -39,6 +44,23 @@ def is_askinv_service():
 class InventorReader(CommonCOMReader):
     def __init__(self):
         super().__init__("Inventor", "Inventor.Application")
+
+        if distutils.version.LooseVersion("3.4") <= distutils.version.LooseVersion(Application.getInstance().getVersion()):
+            MimeTypeDatabase.addMimeType(MimeType(name = "application/x-extension-ipt",
+                                                  comment="Autodesk Inventor part file",
+                                                  suffixes=["ipt"]
+                                                  )
+                                         )
+            MimeTypeDatabase.addMimeType(MimeType(name = "application/x-extension-iam",
+                                                  comment="Autodesk Inventor assembly file",
+                                                  suffixes=["iam"]
+                                                  )
+                                         )
+            MimeTypeDatabase.addMimeType(MimeType(name = "application/x-extension-dwg",
+                                                  comment="Autodesk Inventor drawing file",
+                                                  suffixes=["dwg"]
+                                                  )
+                                         )
 
         self._extension_part = ".IPT"
         self._extension_assembly = ".IAM"
