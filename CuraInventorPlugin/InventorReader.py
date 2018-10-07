@@ -4,13 +4,13 @@
 # * Adding selection to separately import parts from an assembly
 
 # Build-ins
-import distutils.version.LooseVersion
 import math
 import os
 import winreg
 import ctypes
 
 # Uranium/Cura
+from UM.Application import Application # @UnresolvedImport
 from UM.i18n import i18nCatalog # @UnresolvedImport
 from UM.Message import Message # @UnresolvedImport
 from UM.Logger import Logger # @UnresolvedImport
@@ -19,9 +19,10 @@ from UM.Math.Vector import Vector # @UnresolvedImport
 from UM.Math.Quaternion import Quaternion # @UnresolvedImport
 from UM.Mesh.MeshReader import MeshReader # @UnresolvedImport
 from UM.PluginRegistry import PluginRegistry # @UnresolvedImport
+from UM.Version import Version # @UnresolvedImport
 
 # Since 3.4: Register Mimetypes:
-if distutils.version.LooseVersion("3.4") <= distutils.version.LooseVersion(Application.getInstance().getVersion()):
+if Version("3.4") <= Version(Application.getInstance().getVersion()):
     from UM.MimeTypeDatabase import MimeTypeDatabase, MimeType
 
 # Our plugin
@@ -45,7 +46,7 @@ class InventorReader(CommonCOMReader):
     def __init__(self):
         super().__init__("Inventor", "Inventor.Application")
 
-        if distutils.version.LooseVersion("3.4") <= distutils.version.LooseVersion(Application.getInstance().getVersion()):
+        if Version("3.4") <= Version(Application.getInstance().getVersion()):
             MimeTypeDatabase.addMimeType(MimeType(name = "application/x-extension-ipt",
                                                   comment="Autodesk Inventor part file",
                                                   suffixes=["ipt"]
